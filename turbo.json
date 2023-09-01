@@ -1,0 +1,7 @@
+{
+  "pipeline": {
+    "compile": {
+      "dependsOn": ["^compile"]
+    }
+  }
+}

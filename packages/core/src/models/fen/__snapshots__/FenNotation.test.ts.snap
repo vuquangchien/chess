@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FenNotation should parse fen notation 1`] = `
+FenRecord {
+  "activeColor": "white",
+  "castlingAvailability": CastlingAvailabilitySegment {
+    "blackKingSide": true,
+    "blackQueenSide": true,
+    "castlingAvailability": "KQkq",
+    "whiteKingSide": true,
+    "whiteQueenSide": true,
+  },
+  "enPassantTarget": null,
+  "fullmoveNumber": 1,
+  "halfmoveClock": 0,
+  "notation": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+  "piecePlacement": PiecePlacementSegment {
+    "piecePlacement": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  },
+}
+`;

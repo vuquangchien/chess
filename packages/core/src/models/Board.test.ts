@@ -1,16 +1,29 @@
 import {Board} from './Board';
 // @ts-ignore
-import {expect} from '@jest/globals';
+import {beforeEach, expect} from '@jest/globals';
 import {BoardFactory} from './BoardFactory';
 import {BoardView} from '../views/BoardView';
 import {BoardViewController} from '../views/BoardViewController';
 import {Piece, PieceColors, PieceTypes} from './Piece';
+import {RankIterator} from './CellIterator';
 import {BoardViewFactory} from '../views/BoardViewFactory';
 
 describe('Board', () => {
   let board: Board;
   beforeEach(() => {
     board = BoardFactory.createBoardWithPieces();
+  });
+  it('should create empty board correctly', () => {
+    const board = BoardFactory.createEmptyBoard();
+    const cells = board.cells;
+    expect(cells[0][0].name).toEqual('a8');
+    expect(cells[0][7].name).toEqual('h8');
+    expect(cells[7][0].name).toEqual('a1');
+    expect(cells[7][7].name).toEqual('h1');
+    expect(cells[0][0].getCellIndex()).toEqual(0);
+    expect(cells[0][7].getCellIndex()).toEqual(7);
+    expect(cells[7][0].getCellIndex()).toEqual(56);
+    expect(cells[7][7].getCellIndex()).toEqual(63);
   });
   it('should set piece', () => {
     const board = new Board();
@@ -25,23 +38,12 @@ describe('Board', () => {
     expect(board).toBeDefined();
     expect(board.cells.length).toEqual(8);
     const firstCell = board.cells[0][0];
-    expect(firstCell.rank).toEqual(7);
-    expect(firstCell.file).toEqual(0);
     const lastCell = board.cells[7][7];
-    expect(lastCell.rank).toEqual(0);
-    expect(lastCell.file).toEqual(7);
     expect(firstCell.name).toEqual('a8');
-    expect(board.cells[7][7].name).toEqual('h1');
-  });
-  it.failing('should get files', () => {
-    const board = new Board();
-    const files = board.getFiles();
-    expect(files.length).toEqual(8);
-    expect(files[0].cells[0].name).toEqual('a8');
-    expect(files[0].cells[7].name).toEqual('a1');
+    expect(lastCell.name).toEqual('h1');
   });
   it('should get ranks', () => {
-    const ranks = new Board().getRanks();
+    const ranks = new RankIterator(new Board()).ranks;
     expect(ranks.length).toEqual(8);
     const firstRank = ranks[0];
     expect(firstRank.cells[0].name).toEqual('a8');
@@ -49,7 +51,7 @@ describe('Board', () => {
   });
   it('should iterate cells', () => {
     const board = new Board();
-    const it = board.getRankIterator();
+    const it = new RankIterator(board);
     while (it.hasNext()) {
       const rank = it.next();
       const cellIterator = rank.getIterator();
@@ -66,8 +68,8 @@ describe('Board', () => {
   });
   it('should allow to move piece', () => {
     const board = BoardFactory.createBoardWithPieces();
-    const cell = board.getCell(0, 1);
-    expect(cell.name).toEqual('a7');
+    board.setCurrentPlayer(PieceColors.BLACK);
+    const cell = board.getByCellName('a7');
     board.movePiece(cell, board.getByCellName('a6'));
     expect(cell.piece).toBeNull();
     expect(board.getByCellName('a6').piece).toBeDefined();
@@ -82,142 +84,25 @@ describe('Board', () => {
   });
   it('should mark piece as moved', () => {
     const board = BoardFactory.createBoardWithPieces();
-    const cell = board.getCell(0, 1);
+    const cell = board.getByCellName('a2');
     expect(cell.piece).toBeDefined();
     expect(cell.piece!.isPieceMoved()).toBeFalsy();
-    board.movePiece(cell, board.getByCellName('a6'));
-    expect(board.getByCellName('a6').piece!.isPieceMoved()).toBeTruthy();
+    board.movePiece(cell, board.getByCellName('a3'));
+    expect(board.getByCellName('a3').piece!.isPieceMoved()).toBeTruthy();
   });
-  // highlight tests
-  describe('highlight', () => {
-    // highlight cell
-    it('should highlight cell', () => {
-      const board = BoardFactory.createBoardWithPieces();
-      const cell = board.getCell(0, 1);
-      board.highlightCell(cell);
-      expect(cell.isHighlighted()).toBeTruthy();
-    });
-    // unhighlight cell
-    it('should unhighlight cell', () => {
-      const board = BoardFactory.createBoardWithPieces();
-      const cell = board.getCell(0, 1);
-      board.highlightCell(cell);
-      board.unHighlightCell(cell);
-      expect(cell.isHighlighted()).toBeFalsy();
-    });
-    // reset highlight
-    it('should reset highlight', () => {
-      const board = BoardFactory.createBoardWithPieces();
-      const cell = board.getCell(0, 1);
-      board.highlightCell(cell);
-      board.resetHighlight();
-      expect(cell.isHighlighted()).toBeFalsy();
-    });
+  it('should flip current player after move', () => {
+    const board = BoardFactory.createBoardWithPieces();
+    expect(board.getCurrentPlayer()).toEqual(PieceColors.WHITE);
+    board.movePieceByCellName('a2', 'a3');
+    expect(board.getCurrentPlayer()).toEqual(PieceColors.BLACK);
   });
-
-  describe('getPossibleMoves', () => {
-    // king
-    describe('king', () => {
-      it('should get possible moves for king', () => {
-        const board = new Board();
-        const king = Piece.fromName('k');
-        const cell = board.getByCellName('d4');
-        cell.setPiece(king);
-        board.highlightPossibleMoves(cell);
-        const view = BoardViewFactory.fromBoard(board).render();
-        expect(view).toMatchSnapshot();
-        const possibleMoves = board.getPossibleMoves(cell);
-
-        expect(possibleMoves.length).toEqual(8);
-      });
-    });
-  });
-  // queen
-  describe('queen', () => {
-    it('should get possible moves for queen', () => {
-      const board = new Board();
-      const queen = Piece.fromName('q');
-      const cell = board.getByCellName('d4');
-      cell.setPiece(queen);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-
-      expect(possibleMoves.length).toEqual(27);
-    });
-  });
-  // rook
-  describe('rook', () => {
-    it('should get possible moves for rook', () => {
-      const board = new Board();
-      const rook = Piece.fromName('r');
-      const cell = board.getByCellName('d4');
-      cell.setPiece(rook);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-
-      expect(possibleMoves.length).toEqual(14);
-    });
-  });
-  // bishop
-  describe('bishop', () => {
-    it('should get possible moves for bishop', () => {
-      const board = new Board();
-      const bishop = Piece.fromName('b');
-      const cell = board.getByCellName('d4');
-      cell.setPiece(bishop);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-
-      expect(possibleMoves.length).toEqual(13);
-    });
-  });
-  // knight
-  describe('knight', () => {
-    it('should get possible moves for knight', () => {
-      const board = new Board();
-      const knight = Piece.fromName('n');
-      const cell = board.getByCellName('d4');
-      cell.setPiece(knight);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-
-      expect(possibleMoves.length).toEqual(8);
-    });
-  });
-  // pawn
-  describe('pawn', () => {
-    it('should get possible moves for pawn', () => {
-      const board = new Board();
-      const pawn = Piece.fromName('p');
-      pawn.setPieceMoved();
-      const cell = board.getByCellName('d4');
-      cell.setPiece(pawn);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-
-      expect(possibleMoves.length).toEqual(1);
-    });
-    // pawn first move
-    it('should get possible moves for pawn on first move', () => {
-      const board = new Board();
-      const pawn = Piece.fromName('p');
-      const cell = board.getByCellName('d7');
-      cell.setPiece(pawn);
-      board.highlightPossibleMoves(cell);
-      const view = BoardViewFactory.fromBoard(board).render();
-      expect(view).toMatchSnapshot();
-      const possibleMoves = board.getPossibleMoves(cell);
-      expect(possibleMoves.length).toEqual(2);
-    });
+  it('should clone board', () => {
+    const board = BoardFactory.createBoardWithPieces();
+    const clone = board.clone();
+    board.movePieceByCellName('b1', 'c3');
+    expect(clone.getByCellName('b1').piece).toBeDefined();
+    expect(BoardViewFactory.fromBoard(clone).render()).not.toEqual(
+      BoardViewFactory.fromBoard(board).render()
+    );
   });
 });

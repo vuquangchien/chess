@@ -1,5 +1,5 @@
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
+import {Move} from '../moves/Move';
 import {PieceTypes} from '../Piece';
 
 export class KingMovePolicy implements MovePolicy {

@@ -1,7 +1,6 @@
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
+import {Move} from '../moves/Move';
 import {PieceTypes} from '../Piece';
-import {CapturePolicy} from './PawnCapturePolicy';
 
 export class RookMovePolicy implements MovePolicy {
   isMoveValid(move: Move): string | null {
@@ -11,22 +10,6 @@ export class RookMovePolicy implements MovePolicy {
     }
     if (!move.isVertical() && !move.isHorizontal()) {
       return 'Rook cannot move diagonally';
-    }
-    return null;
-  }
-}
-export class RookCapturePolicy extends CapturePolicy {
-  pieceType = PieceTypes.ROOK;
-  isMoveValid(move: Move): string | null {
-    if (super.isMoveValid(move)) {
-      return super.isMoveValid(move);
-    }
-    if (move.from.piece!.type !== this.pieceType) {
-      return null;
-    }
-
-    if (!move.isVertical() || !move.isHorizontal()) {
-      return 'Rook must capture vertically or horizontally';
     }
     return null;
   }

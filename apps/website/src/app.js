@@ -3,8 +3,8 @@ import {Grid} from "./grid";
 function renderPhaser() {
   const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 800,
     backgroundColor: '#ffffff',
     physics: {
       default: 'arcade',

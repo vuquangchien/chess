@@ -1,6 +1,6 @@
 import {Board} from '../Board';
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
+import {Move} from '../moves/Move';
 import {PieceTypes} from '../Piece';
 
 export class NotBlockedByFriendPiecePolicy implements MovePolicy {

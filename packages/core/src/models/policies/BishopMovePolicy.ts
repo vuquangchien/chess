@@ -1,7 +1,8 @@
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
-import {PieceColors, PieceTypes} from '../Piece';
-import {Board} from '../Board';
+import {Move} from '../moves/Move';
+import {PieceTypes} from '../Piece';
+import {CapturePolicy} from './CapturePolicy';
+import {PieceType} from '../PieceType';
 
 export class BishopMovePolicy implements MovePolicy {
   isMoveValid(move: Move): string | null {
@@ -15,18 +16,18 @@ export class BishopMovePolicy implements MovePolicy {
     return null;
   }
 }
+export class BishopCapturePolicy extends CapturePolicy {
+  pieceType: PieceType = PieceTypes.BISHOP;
 
-export class WhiteMoveFirstPolicy implements MovePolicy {
-  private board: Board;
-  constructor(board: Board) {
-    this.board = board;
-  }
   isMoveValid(move: Move): string | null {
-    if (
-      this.board.moves.length === 0 &&
-      move.from.piece!.getColor() === PieceColors.BLACK
-    ) {
-      return 'White must move first';
+    if (super.isMoveValid(move)) {
+      return super.isMoveValid(move);
+    }
+    if (!this.isValidPieceType()) {
+      return null;
+    }
+    if (!move.isDiagonal()) {
+      return 'Bishop cannot capture vertically or horizontally';
     }
     return null;
   }

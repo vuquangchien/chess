@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`policies bishop should get possible moves for bishop 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♗□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies getPossibleMoves king should get possible moves for king 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♔□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies knight should get possible moves for knight 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♘□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies pawn should get possible moves for pawn 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♙□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies pawn should get possible moves for pawn on first move 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □ □ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □♙□ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies queen should get possible moves for queen 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♕□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;
+
+exports[`policies rook should get possible moves for rook 1`] = `
+"
+□□□□a□b□c□d□e□f□g□h
+□8 □ □ □ □ □ □ □ □ 
+□7 □ □ □ □ □ □ □ □ 
+□6 □ □ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □♖□ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □ □ □ □ □ □ □ □ 
+□1 □ □ □ □ □ □ □ □ 
+"
+`;

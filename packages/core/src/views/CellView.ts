@@ -46,8 +46,8 @@ export class CellView extends AbstractView<CellViewController> {
     const background = cell.color === 'black' ? '#D18B47' : '#FFCE9E';
     const icon = piece ? Icons[piece.getType()][piece.getColor()] : ' ';
     result = this.engine.renderBox({
-      column: cell.file,
-      row: cell.rank,
+      column: cell.colIndex,
+      row: cell.rowIndex,
       background,
       text: icon,
     });

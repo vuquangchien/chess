@@ -21,6 +21,14 @@ export const PieceTypes: {[key: string]: PieceType} = {
   QUEEN: 'queen',
   KING: 'king',
 };
+export const PieceTypesByFenName: {[key: string]: PieceType} = {
+  p: PieceTypes.PAWN,
+  r: PieceTypes.ROOK,
+  n: PieceTypes.KNIGHT,
+  b: PieceTypes.BISHOP,
+  q: PieceTypes.QUEEN,
+  k: PieceTypes.KING,
+};
 export const PieceColors: {[key: string]: PieceColor} = {
   WHITE: 'white',
   BLACK: 'black',
@@ -39,14 +47,7 @@ export class Piece {
     const color =
       name === name.toUpperCase() ? PieceColors.WHITE : PieceColors.BLACK;
     const type = name.toLowerCase();
-    const pieceType = {
-      p: PieceTypes.PAWN,
-      r: PieceTypes.ROOK,
-      n: PieceTypes.KNIGHT,
-      b: PieceTypes.BISHOP,
-      q: PieceTypes.QUEEN,
-      k: PieceTypes.KING,
-    }[type];
+    const pieceType = PieceTypesByFenName[type];
     if (!pieceType) throw new Error(`Unknown piece type: ${type}`);
     return new Piece(pieceType, color);
   }

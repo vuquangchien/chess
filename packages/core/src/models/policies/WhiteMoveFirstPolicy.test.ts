@@ -1,10 +1,12 @@
 import {BoardFactory} from '../BoardFactory';
 import {Board} from '../Board';
+import {PieceColors} from '../Piece';
 
 describe('WhiteMoveFirstPolicy', () => {
   let board: Board;
   beforeEach(() => {
     board = BoardFactory.createBoardWithPieces();
+    board.setCurrentPlayer(PieceColors.BLACK);
   });
   it('should allow white to move first', () => {
     expect(() => {

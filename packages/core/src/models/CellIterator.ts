@@ -5,10 +5,12 @@ import {Rank} from './Rank';
 export class RankIterator {
   private board: Board;
   private index: number;
+  ranks: Rank[];
 
   constructor(board: Board) {
     this.board = board;
     this.index = -1;
+    this.ranks = board.cells.map(cells => new Rank(cells));
   }
 
   hasNext(): boolean {
@@ -25,7 +27,7 @@ export class RankIterator {
   }
 
   private current(): Rank {
-    return this.board.getRanks()[this.index];
+    return this.ranks[this.index];
   }
 }
 export class CellIterator {

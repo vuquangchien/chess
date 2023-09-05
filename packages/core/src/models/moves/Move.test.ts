@@ -1,7 +1,7 @@
-import {MoveFactory} from './Move';
-import {Cell} from './Cell';
+import {Cell} from '../Cell';
 // @ts-ignore
 import {expect} from '@jest/globals';
+import {MoveFactory} from './MoveFactory';
 
 describe('move', () => {
   it('should get correct distance', () => {

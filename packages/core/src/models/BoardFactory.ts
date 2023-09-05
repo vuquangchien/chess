@@ -10,8 +10,9 @@ export class BoardFactory {
     const fenRecord = new FenRecord(fen);
     const cells = fenRecord.piecePlacement.getCells();
     cells.forEach(cell => {
-      board.getCell(cell.file, cell.rank).setPiece(cell.piece);
+      board.getByCellName(cell.name).setPiece(cell.piece);
     });
+    board.setCurrentPlayer(fenRecord.activeColor);
     return board;
   }
   public static createBoardWithPieces(): Board {

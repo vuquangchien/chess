@@ -10,36 +10,38 @@ export class Cell {
     this.cell = cell;
     this.parent = grid
     this.renderCell()
-
   }
 
+  cellBgColor() {
+    return (this.cell.color === 'white' ? theme.BOARD_COLOR_WHITE : theme.BOARD_COLOR_BLACK)
+  }
+  cellHighlightColor() {
+    return (this.cell.color === 'white' ? theme.BOARD_COLOR_HIGHLIGHT_WHITE : theme.BOARD_COLOR_HIGHLIGHT_BLACK)
+  }
   renderCell() {
     const {MT, ML, U} = theme
     const scene = this.context.scene
     const cell = this.cell
     this.rectEl = scene.add.rectangle(
-      ML + cell.file * U, MT + cell.rank * U, U, U)
-      .setFillStyle(cell.color === 'white' ? 0xD18B47 : 0xFFCE9E)
+      ML + cell.colIndex * U, MT + cell.rowIndex * U, U, U)
+      .setFillStyle(this.cellBgColor())
       .setInteractive();
     this.rectEl.on('pointerdown', this.parent.handleHighlightPossibleMoves.bind(this.parent, this))
     this.rectEl.on('pointerup', this.parent.handleMove.bind(this.parent, this))
     this.textEl = scene.add.text(
-      ML + cell.file * U - 15,
-      MT + cell.rank * U - 30,
+      ML + cell.colIndex * U - 15,
+      MT + cell.rowIndex * U - 30,
       cell.getPiece()?.getIcon(), {font: '50px Arial', fill: '#000000', align: 'center'})
   }
 
   highlight() {
-    this.rectEl.setStrokeStyle(4, 0xefc53f);
+    this.rectEl.setFillStyle(this.cellHighlightColor());
   }
 
   unHighlight() {
-    this.rectEl.setStrokeStyle(0);
+    this.rectEl.setFillStyle(this.cellBgColor());
   }
   destroy() {
-    // const scene = this.context.scene
-    // scene.remove(this.rectEl)
-    // scene.remove(this.textEl)
     this.rectEl.destroy()
     this.textEl.destroy()
   }

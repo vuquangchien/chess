@@ -1,6 +1,5 @@
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
-import * as _ from 'lodash';
+import {Move} from '../moves/Move';
 import {Board} from '../Board';
 
 export class SamePlayerNotMoveTwicePolicy implements MovePolicy {
@@ -11,11 +10,8 @@ export class SamePlayerNotMoveTwicePolicy implements MovePolicy {
   }
 
   public isMoveValid(move: Move): string | null {
-    const lastMove = _.last(this.board.moves);
-    if (lastMove) {
-      if (lastMove.player === move.player) {
-        return 'Same player cannot move twice';
-      }
+    if (this.board.getCurrentPlayer() !== move.player) {
+      return 'It is not your turn';
     }
     return null;
   }

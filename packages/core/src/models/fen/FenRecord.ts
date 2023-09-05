@@ -40,7 +40,7 @@ export class PiecePlacementRank {
       const validPieceName = 'rnbqkpRNBQKP'.split('').includes(pieceName);
       const cell = new Cell(
         fileIndex,
-        7 - this.rankIndex,
+        this.rankIndex,
         validPieceName ? Piece.fromName(pieceName) : null
       );
       cells.push(cell);

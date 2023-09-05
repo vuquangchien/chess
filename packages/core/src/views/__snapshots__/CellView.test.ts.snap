@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CellView should render cell with piece 1`] = `"♝ "`;
+exports[`CellView should render cell with piece 1`] = `"□♝"`;
 
-exports[`CellView should render empty cell 1`] = `"■ "`;
+exports[`CellView should render empty cell 1`] = `"□ "`;
 
-exports[`CellView should render highlighted cell 1`] = `"× "`;
+exports[`CellView should render highlighted cell 1`] = `"□ "`;
 
-exports[`CellView should render highlighted cell with piece 1`] = `"×♝"`;
+exports[`CellView should render highlighted cell with piece 1`] = `"□♝"`;
 
 exports[`CellView should render white cell 1`] = `"□ "`;

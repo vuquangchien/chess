@@ -4,6 +4,7 @@ import {CellViewController} from './CellViewController';
 import {BoardViewController} from './BoardViewController';
 import {RowEl, TextEl} from './RowEl';
 import {AbstractView} from './AbstractView';
+import {RankIterator} from '../models/CellIterator';
 
 export class BoardView extends AbstractView<BoardViewController> {
   public init(): void {
@@ -16,7 +17,7 @@ export class BoardView extends AbstractView<BoardViewController> {
     );
     this.addChild(headerRow);
     const board = this.controller.getBoard();
-    const iterator = board.getRankIterator();
+    const iterator = new RankIterator(board);
     while (iterator.hasNext()) {
       const row = new RowEl();
       row.addChild(new TextEl({text: `${7 - iterator.currentIndex()} `}));

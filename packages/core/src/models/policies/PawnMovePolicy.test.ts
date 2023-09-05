@@ -4,11 +4,13 @@ import {BoardView} from '../../views/BoardView';
 import {BoardViewController} from '../../views/BoardViewController';
 import {BoardFactory} from '../BoardFactory';
 import {Board} from '../Board';
+import {PieceColors} from '../Piece';
 
 describe('pawn', () => {
   let board: Board;
   beforeEach(() => {
     board = BoardFactory.createBoardWithPieces();
+    board.setCurrentPlayer(PieceColors.BLACK);
   });
   it('should not allow pawn to move diagonal', () => {
     expect(() => {

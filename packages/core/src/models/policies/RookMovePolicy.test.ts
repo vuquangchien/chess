@@ -1,8 +1,9 @@
 // @ts-ignore
-import {describe} from '@jest/globals';
+import {describe, expect} from '@jest/globals';
 import {RookMovePolicy} from './RookMovePolicy';
-import {MoveFactory} from '../Move';
 import {Cell} from '../Cell';
+import {MoveFactory} from '../moves/MoveFactory';
+import {BoardFactory} from '../BoardFactory';
 
 describe('RookMovePolicy', () => {
   it('should allow to move horizontally', () => {
@@ -23,5 +24,19 @@ describe('RookMovePolicy', () => {
       MoveFactory.createMove(Cell.fromName('a8', 'r'), Cell.fromName('h1'))
     );
     expect(error).toEqual('Rook cannot move diagonally');
+  });
+  it('should allow rook to capture', () => {
+    expect(() => {
+      const board = BoardFactory.createFromFen(
+        'rnb1kbnr/1ppp1ppp/8/4p3/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1'
+      );
+      board.movePieceByCellName('a8', 'a2');
+    }).not.toThrowError();
+    expect(() => {
+      const board = BoardFactory.createFromFen(
+        'rnb1kbnr/1ppp1ppp/8/4p3/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1'
+      );
+      board.movePieceByCellName('a8', 'b2');
+    }).toThrowError();
   });
 });

@@ -1,5 +1,5 @@
 import {MovePolicy} from './MovePolicy';
-import {Move} from '../Move';
+import {Move} from '../moves/Move';
 
 export class PieceNotEmptyPolicy implements MovePolicy {
   public isMoveValid(move: Move): string | null {

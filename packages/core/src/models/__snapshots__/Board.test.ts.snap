@@ -1,113 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Board bishop should get possible moves for bishop 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ ■ □ ■ □ × 
-7 × □ ■ □ ■ □ × □ 
-6 □ × □ ■ □ × □ ■ 
-5 ■ □ × □ × □ ■ □ 
-4 □ ■ □ ♝ □ ■ □ ■ 
-3 ■ □ × □ × □ ■ □ 
-2 □ × □ ■ □ × □ ■ 
-1 × □ ■ □ ■ □ × □ 
-"
-`;
-
-exports[`Board getPossibleMoves king should get possible moves for king 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ ■ □ ■ □ ■ 
-7 ■ □ ■ □ ■ □ ■ □ 
-6 □ ■ □ ■ □ ■ □ ■ 
-5 ■ □ × × × □ ■ □ 
-4 □ ■ × ♚ × ■ □ ■ 
-3 ■ □ × × × □ ■ □ 
-2 □ ■ □ ■ □ ■ □ ■ 
-1 ■ □ ■ □ ■ □ ■ □ 
-"
-`;
-
-exports[`Board knight should get possible moves for knight 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ ■ □ ■ □ ■ 
-7 ■ □ ■ □ ■ □ ■ □ 
-6 □ ■ × ■ × ■ □ ■ 
-5 ■ × ■ □ ■ × ■ □ 
-4 □ ■ □ ♞ □ ■ □ ■ 
-3 ■ × ■ □ ■ × ■ □ 
-2 □ ■ × ■ × ■ □ ■ 
-1 ■ □ ■ □ ■ □ ■ □ 
-"
-`;
-
-exports[`Board pawn should get possible moves for pawn 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ ■ □ ■ □ ■ 
-7 ■ □ ■ □ ■ □ ■ □ 
-6 □ ■ □ ■ □ ■ □ ■ 
-5 ■ □ ■ □ ■ □ ■ □ 
-4 □ ■ □ ♟ □ ■ □ ■ 
-3 ■ □ ■ × ■ □ ■ □ 
-2 □ ■ □ ■ □ ■ □ ■ 
-1 ■ □ ■ □ ■ □ ■ □ 
-"
-`;
-
-exports[`Board pawn should get possible moves for pawn on first move 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ ■ □ ■ □ ■ 
-7 ■ □ ■ ♟ ■ □ ■ □ 
-6 □ ■ □ × □ ■ □ ■ 
-5 ■ □ ■ × ■ □ ■ □ 
-4 □ ■ □ ■ □ ■ □ ■ 
-3 ■ □ ■ □ ■ □ ■ □ 
-2 □ ■ □ ■ □ ■ □ ■ 
-1 ■ □ ■ □ ■ □ ■ □ 
-"
-`;
-
-exports[`Board queen should get possible moves for queen 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ × □ ■ □ × 
-7 × □ ■ × ■ □ × □ 
-6 □ × □ × □ × □ ■ 
-5 ■ □ × × × □ ■ □ 
-4 × × × ♛ × × × × 
-3 ■ □ × × × □ ■ □ 
-2 □ × □ × □ × □ ■ 
-1 × □ ■ × ■ □ × □ 
-"
-`;
-
-exports[`Board rook should get possible moves for rook 1`] = `
-"
-  a b c d e f g h
-8 □ ■ □ × □ ■ □ ■ 
-7 ■ □ ■ × ■ □ ■ □ 
-6 □ ■ □ × □ ■ □ ■ 
-5 ■ □ ■ × ■ □ ■ □ 
-4 × × × ♜ × × × × 
-3 ■ □ ■ × ■ □ ■ □ 
-2 □ ■ □ × □ ■ □ ■ 
-1 ■ □ ■ × ■ □ ■ □ 
-"
-`;
-
 exports[`Board should allow to move piece 1`] = `
 "
-  a b c d e f g h
-8 ♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜ 
-7 ■ ♟ ♟ ♟ ♟ ♟ ♟ ♟ 
-6 ♟ ■ □ ■ □ ■ □ ■ 
-5 ■ □ ■ □ ■ □ ■ □ 
-4 □ ■ □ ■ □ ■ □ ■ 
-3 ■ □ ■ □ ■ □ ■ □ 
-2 ♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙ 
-1 ♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖ 
+□□□□a□b□c□d□e□f□g□h
+□8 □♜□♞□♝□♛□♚□♝□♞□♜
+□7 □ □♟□♟□♟□♟□♟□♟□♟
+□6 □♟□ □ □ □ □ □ □ 
+□5 □ □ □ □ □ □ □ □ 
+□4 □ □ □ □ □ □ □ □ 
+□3 □ □ □ □ □ □ □ □ 
+□2 □♙□♙□♙□♙□♙□♙□♙□♙
+□1 □♖□♘□♗□♕□♔□♗□♘□♖
 "
 `;
